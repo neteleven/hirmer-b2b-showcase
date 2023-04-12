@@ -99,6 +99,25 @@
   transition: opacity 0.4s;
   z-index: 30;
 }
+
+.product-details-tab-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-details-tab-content-care-instruction {
+   display: grid;
+   grid-template-columns: auto 1fr;
+   grid-gap: 15px;
+}
+
+.product-details-tab-content-separator {
+  height: auto;
+  width: 2px;
+  border-left: 1px solid lightgray;
+  margin: 10px 0;
+}
+
 .product-detail-page-wrapper {
   @apply w-full md:pt-24 pt-32 md:px-24 px-[16.5px] md:pb-24 pb-12 font-inter;
 }
