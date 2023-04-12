@@ -187,8 +187,8 @@ li.index-item-active {
   @apply pt-20;
 }
 .mobile-bar {
-  background-image: conic-gradient(from 180deg at 50% 70%, #9bb9ca, #2c5c77);
-  @apply h-[72px] w-full p-6 font-inter font-semibold text-[24px] leading-[24px] pb-6 text-white;
+  //background-image: conic-gradient(from 180deg at 50% 70%, #9bb9ca, #2c5c77);
+  @apply h-[72px] w-full p-6 font-inter font-semibold text-[24px] leading-[24px] pb-6 text-black;
 }
 .switch-item {
   @apply !p-0 !w-[45px] !h-[24px] !rounded-[12px] !border border-gray;

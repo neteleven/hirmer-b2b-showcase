@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const EachService = (props) => {
   return (
-    <div className="text-white text-left md:text-center md:items-center">
+    <div className="text-black text-left md:text-center md:items-center">
       <div className="w-full">
         <img
           src={props.src}

@@ -7,11 +7,11 @@ module.exports = {
     extend: {
       colors: {
         white: "#FFFFFF",
-        black: "#000000",
+        black: "#333333",
         bgWhite: "#F7F8F8",
         gray: "#ACAEB2",
         darkGray: "#818385",
-        lightGray: "#D7DADE",
+        lightGray: "#E9E9E9",
         primaryBlue: "#0380f3",
         lightBlue: "#5F8FAA",
         emporixGold: "#FFA800",
@@ -22,6 +22,8 @@ module.exports = {
         lightRed: "#FF6865",
         tinBlue: "#214559",
         lightPink: "#FFCCCB",
+        blue: "#3582D1",
+        blueHover: "#365C97",
       }
     }
   },
