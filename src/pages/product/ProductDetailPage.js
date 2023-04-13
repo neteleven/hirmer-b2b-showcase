@@ -21,7 +21,7 @@ import Accordion, { AccordionItem } from '../../components/Utilities/accordion'
 import LayoutContext from '../context'
 import { productUrl } from '../../services/service.config'
 
-import { LargePrimaryButton } from '../../components/Utilities/button'
+import { HirmerButton } from '../../components/Utilities/button'
 import {
   CurrencyBeforeComponent,
   CurrencyBeforeValue,
@@ -271,7 +271,7 @@ const PrdouctAddToCart = () => {
         />
       </div>
       <div className="">
-        <LargePrimaryButton
+        <HirmerButton
           disabled={!product.price}
           className="product-add-to-cart-btn"
           onClick={() =>

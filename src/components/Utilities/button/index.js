@@ -73,3 +73,14 @@ export const BackButton = ({ link, title, className }) => {
     </div>
   )
 }
+
+export const HirmerButton = ({ title, onClick, className }) => {
+  return (
+    <button
+      className={'hirmer-btn ' + (className ? className : '')}
+      onClick={onClick}
+    >
+      {title}
+    </button>
+  )
+}

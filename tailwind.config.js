@@ -24,6 +24,8 @@ module.exports = {
         lightPink: "#FFCCCB",
         blue: "#3582D1",
         blueHover: "#365C97",
+        green: "#83ca25",
+        greenHover: "#598919",
       }
     }
   },
