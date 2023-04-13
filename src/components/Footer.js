@@ -10,10 +10,10 @@ const Mobile_footer = () => {
         <li className="py-4 border-b">My Account</li>
         <li className="py-4 border-b">Contact</li>
       </ul>
-      <div className="mobile_only pt-4 pl-6 text-base text-white font-light">
+      <div className="mobile_only pt-4 pl-6 text-base text-black font-light">
         Call Us: +44123645678
       </div>
-      <div className="mobile_only_flex pt-6 pl-6  text-white">
+      <div className="mobile_only_flex pt-6 pl-6  text-black">
         <div>
           <img src="/facebook.png" />
         </div>
@@ -30,7 +30,7 @@ const Dektop_footer = () => {
   return (
     <div className="desktop_only_flex  md:pt-24 max-w-screen-xl mx-auto ">
       <div className="mx-auto">
-        <ul className="font-inter text-base text-white">
+        <ul className="font-inter text-base text-black">
           <li className="text-emporixGold font-bold ">About Us</li>
           <li className=" font-light pt-4">Who we are</li>
           <li className=" font-light pt-4">Quality in the details</li>
@@ -38,7 +38,7 @@ const Dektop_footer = () => {
         </ul>
       </div>
       <div className="mx-auto">
-        <ul className="font-inter text-base text-white">
+        <ul className="font-inter text-base text-black">
           <li className="text-emporixGold font-bold ">Support</li>
           <li className=" font-light pt-4">Delivery</li>
           <li className=" font-light pt-4">Returns</li>
@@ -47,7 +47,7 @@ const Dektop_footer = () => {
         </ul>
       </div>
       <div className="mx-auto">
-        <ul className="font-inter text-base text-white">
+        <ul className="font-inter text-base text-black">
           <li className="text-emporixGold font-bold ">My Account</li>
           <li className=" font-light pt-4">Sign In</li>
           <li className=" font-light pt-4">Register</li>
@@ -56,11 +56,11 @@ const Dektop_footer = () => {
         </ul>
       </div>
       <div className="mx-auto">
-        <ul className="font-inter text-base text-white">
+        <ul className="font-inter text-base text-black">
           <li className="text-emporixGold font-bold ">Contact</li>
           <li className=" font-light pt-4">Call Us: +44123645678</li>
         </ul>
-        <div className="pt-6  text-white flex">
+        <div className="pt-6  text-black flex">
           <div>
             <img src="/facebook.png" />
           </div>

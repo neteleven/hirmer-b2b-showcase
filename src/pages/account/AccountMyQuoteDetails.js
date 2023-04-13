@@ -234,13 +234,13 @@ const AccountMyOrdersDetails = () => {
               <div className="mt-4">
                 <button
                   onClick={handleAcceptQuote}
-                  className="w-full text-[16px] leading-[16px] text-center font-semibold h-12 px-6 bg-tinBlue hover:bg-tinBlue text-white"
+                  className="w-full text-[16px] leading-[16px] text-center font-semibold h-12 px-6 bg-tinBlue hover:bg-tinBlue text-black"
                 >
                   ACCEPT QUOTE
                 </button>
                 <button
                   onClick={handleDeclineQuote}
-                  className="w-full text-[16px] leading-[16px] text-center font-semibold h-12 px-6 bg-lightRed hover:bg-tinBlue text-white mt-4"
+                  className="w-full text-[16px] leading-[16px] text-center font-semibold h-12 px-6 bg-lightRed hover:bg-tinBlue text-black mt-4"
                 >
                   DECLINE QUOTE
                 </button>
