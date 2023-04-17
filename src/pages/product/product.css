@@ -105,10 +105,26 @@
   justify-content: space-between;
 }
 
+.information-content-product ul{
+  list-style-type: disc;
+  padding: 0 0 1rem 1rem;
+}
+
+.product-details-tab-content-care-wrapper {
+  margin-top: 3rem;
+  width: 40%;
+}
+
 .product-details-tab-content-care-instruction {
    display: grid;
    grid-template-columns: auto 1fr;
-   grid-gap: 15px;
+   grid-gap: 10px;
+   margin-top: 15px;
+}
+
+.product-details-tab-content-care-instruction span {
+  font-size: 1rem;
+  line-height: 20px;
 }
 
 .product-details-tab-content-separator {
@@ -295,7 +311,7 @@
   background-color: black !important;
 }
 .product-details-tab-content-wrapper {
-  @apply gap-12 grid grid-cols-1 mt-12;
+  @apply gap-12 grid grid-cols-1 mt-12 w-2/5;
 }
 .information-caption {
   @apply border-b border-lightGray pb-4 px-6 pt-1 text-[16px] leading-[24px] font-bold;
