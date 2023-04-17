@@ -235,10 +235,10 @@ const MobileFilterPanel = (props) => {
         </ul>
       </div>
       <div className="mt-12 font-inter font-bold">
-        <div className="w-full h-12 bg-tinBlue text-white  flex items-center ">
+        <div className="w-full h-12 bg-tinBlue text-black  flex items-center ">
           <span className="text-center w-full">APPLY FILTER </span>
         </div>
-        <div className="w-full h-12 bg-bgWhite text-white  flex items-center mt-6">
+        <div className="w-full h-12 bg-bgWhite text-black  flex items-center mt-6">
           <span className="text-center text-tinBlue w-full">CLEAR ALL </span>
         </div>
       </div>

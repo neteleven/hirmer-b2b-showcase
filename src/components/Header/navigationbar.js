@@ -67,7 +67,7 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <div className="bg-tinBlue w-full h-12 text-sm  text-center items-center text-white">
+            <div className="bg-tinBlue w-full h-12 text-sm  text-center items-center text-black">
               <Link to={loginUrl()}>
                 <LargePrimaryButton className="" title="LOGIN | REGISTER" />
               </Link>
@@ -239,13 +239,13 @@ const Navbar = () => {
   }, [cartAccount])
 
   return (
-    <header className="header">
+    <header className="header bg-lightGray">
       {/* Dektop language and currency selection */}
-      <div className="desktop_only_flex font-inter text-sm text-white">
+      <div className="desktop_only_flex font-inter text-sm text-black">
         <div>
           {fields.siteLabel}:
           <select
-            className="bg-darkBlue w-38 mr-[22px]"
+            className=" w-38 mr-[22px]"
             onChange={handleSiteChange}
             value={currentSite}
           >
@@ -264,7 +264,7 @@ const Navbar = () => {
         <div>
           {fields.languageLabel}:
           <select
-            className="bg-darkBlue"
+            className=""
             onChange={(event) => setLanguage(event.target.value)}
             value={currentLanguage}
           >
@@ -286,7 +286,7 @@ const Navbar = () => {
             onChange={(e) =>
               currencyChangeHandler(e.target.value, currentSiteObject)
             }
-            className="bg-darkBlue"
+            className=""
           >
             {currencyList.map((currency) => {
               return (
@@ -300,7 +300,7 @@ const Navbar = () => {
       </div>
 
       {/* Dektop navigation selection */}
-      <div className="desktop_only_flex font-inter font-normal text-sm text-white">
+      <div className="desktop_only_flex font-inter font-normal text-sm text-black">
         {!currentUser ? (
           <ul className="flex">
             <li className="px-4 flex">
@@ -311,7 +311,7 @@ const Navbar = () => {
               ) : (
                 <AiOutlineShoppingCart size={20} onClick={handleOpenCart} />
               )}
-              <div className="pl-3 text-white flex">
+              <div className="pl-3 text-black flex">
                 <CurrencyBeforeValue value={cartTotalPrice} />
               </div>
             </li>
@@ -360,7 +360,7 @@ const Navbar = () => {
                 <AiOutlineShoppingCart size={20} />
               )}
 
-              <div className="pl-[17.5px] text-white flex">
+              <div className="pl-[17.5px] text-black flex">
                 <CurrencyBeforeValue
                   currency={cartCurrency}
                   value={cartTotalPrice}
@@ -376,7 +376,7 @@ const Navbar = () => {
       </div>
 
       {/* mobile menu selection */}
-      <div className="mobile_only_flex pl-[30.25px]  text-white cursor-pointer">
+      <div className="mobile_only_flex pl-[30.25px]  text-black cursor-pointer">
         {!open ? <AiOutlineMenu size={27.5} onClick={handleNavOpen} /> : null}
         {/* absolut mobile navigation */}
         <div
@@ -404,7 +404,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="mobile_only_flex text-white">
+      <div className="mobile_only_flex text-black">
         <Link to={homeUrl()} className="flex">
           <img src="/atom.png"></img>
           <p className="font-medium text-xl px-3 pt-1">
@@ -413,7 +413,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="mobile_only text-white pr-[30px]">
+      <div className="mobile_only text-black pr-[30px]">
         <AiOutlineSearch size={20} />
       </div>
     </header>

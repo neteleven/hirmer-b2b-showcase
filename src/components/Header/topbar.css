@@ -15,7 +15,7 @@
 
 .header-mega_dropdown-content {
   /* display: none; */
-  margin-top: 67px;
+  margin-top: 42px;
   height: 360px;
   position: absolute;
   background-color: #f9f9f9;
@@ -90,7 +90,7 @@ input[type='search'] {
 }
 
 input[type='search']::placeholder {
-  color: white;
+  color: #333;
   padding-left: 20px;
 }
 
@@ -100,8 +100,8 @@ button[type='submit']:hover {
 
 button[type='submit']:focus,
 input[type='search']:focus {
-  box-shadow: 0 0 3px 0 white;
-  border-color: white;
+  box-shadow: 0 0 3px 0 #333;
+  border-color: #333;
   outline: none;
 }
 
@@ -111,7 +111,7 @@ form.nosubmit {
 }
 
 input.nosubmit {
-  border: 1px solid white;
+  border: 1px solid #333;
   border-radius: 20px;
 
   height: 40px;
@@ -119,11 +119,10 @@ input.nosubmit {
   /* background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' stroke='white' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 20px center; */
   background: transparent url('../../assets/search.png') no-repeat 20px center;
 
-  background-color: #87abbf;
+  background-color: #fff;
 }
 
 .nav-background-title {
-  background: url('../../assets/nav_bg.png') no-repeat;
   background-size: 100% 100%;
 }
 
@@ -149,7 +148,6 @@ input.nosubmit {
 }
 
 .mega_content_bg {
-  @apply bg-gradient-to-b bg-lightBlue bg-blueGray;
 }
 
 .mega_content_category_li {

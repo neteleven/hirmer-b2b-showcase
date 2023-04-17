@@ -21,7 +21,7 @@ export default function AccountMenu(props) {
 
   return (
     <Menu as="div" className="relative inline-block text-left">
-      <Menu.Button className="inline-flex justify-center w-full    text-sm  text-white ">
+      <Menu.Button className="inline-flex justify-center w-full    text-sm  text-black ">
         <HiOutlineUserCircle size={20} />
         <div className="pl-2">{props.name}</div>
         <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
