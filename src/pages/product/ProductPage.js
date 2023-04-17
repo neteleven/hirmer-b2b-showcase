@@ -8,7 +8,7 @@ import ProductListBanner from './ProductListBanner'
 const FilterButton = (props) => {
   return (
     <div
-      className="lg:hidden w-[327px] mb-12 h-12 mx-auto bg-tinBlue text-white flex items-center"
+      className="lg:hidden w-[327px] mb-12 h-12 mx-auto bg-tinBlue text-black flex items-center"
       onClick={props.onClick}
     >
       <div className="mx-auto flex">

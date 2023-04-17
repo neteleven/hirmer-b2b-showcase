@@ -92,7 +92,7 @@ const Login = (props) => {
         </Alert>
       </Snackbar>
       <GridLayout className="md:w-[540px] w-[95%] mx-auto h-[740px] md:pt-[138px] pt-10">
-        <Container className="w-full h-[110px] items-center  text-center text-white font-bold  text-7xl ">
+        <Container className="w-full h-[110px] items-center  text-center text-black font-bold  text-7xl ">
           <Container className="mx-auto">
             <Link to={homeUrl} className="flex">
               <img src="/login_atom.png" className="w-[78px] h-[86px] mr-5" />
@@ -146,7 +146,7 @@ const Login = (props) => {
             </LayoutBetween>
             <Box className="w-full !pt-12">
               <button
-                className="w-full text-white bg-tinBlue h-12 hover:bg-lightBlue"
+                className="w-full text-black bg-tinBlue h-12 hover:bg-lightBlue"
                 type="submit"
               >
                 {loading ? <CircularProgress color="secondary" /> : 'LOG IN'}

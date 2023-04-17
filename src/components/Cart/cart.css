@@ -80,7 +80,7 @@
   @apply w-full text-[14px] leading-[14px] text-center font-bold h-12 px-6 bg-brightRed text-[color:white];
 }
 .cart-go-cart-btn {
-  @apply w-full text-[14px] leading-[14px] text-center font-bold h-12 px-6 bg-lightRed text-white;
+  @apply w-full text-[14px] leading-[14px] text-center font-bold h-12 px-6 bg-lightRed text-black;
 }
 .cart-request-quote-btn {
   @apply w-full text-[14px] leading-[14px] text-center font-bold h-12 px-6 bg-lightPink text-tinBlue;

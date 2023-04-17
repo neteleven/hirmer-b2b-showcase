@@ -22,7 +22,7 @@ import Accordion, { AccordionItem } from '../../components/Utilities/accordion'
 import LayoutContext from '../context'
 import { productUrl } from '../../services/service.config'
 
-import { LargePrimaryButton } from '../../components/Utilities/button'
+import { HirmerButton } from '../../components/Utilities/button'
 import {
   CurrencyBeforeComponent,
   CurrencyBeforeValue,
@@ -82,10 +82,10 @@ const ProductDetailCategoryCaptionBar = ({ category }) => {
     categoryTree.push({ caption: category[c], link: lnk })
   }
   return (
-    <div className="product-detail-category-caption-bar">
+    <div className="product-detail-category-caption-bar flex justify-center">
       <Breadcrumbs
         className="lg:block hidden"
-        separator="|"
+        separator="/"
         aria-label="breadcrumb"
       >
         {categoryTree.map((row, index) => {
@@ -108,7 +108,9 @@ const ProductDetailCategoryCaptionBar = ({ category }) => {
               {index !== categoryTree.length - 1 ? (
                 row.caption
               ) : (
-                <Bold>{row.caption}</Bold>
+                <Bold>
+                  <span className="text-blue">{row.caption}</span>
+                </Bold>
               )}
             </Link>
           )
@@ -116,7 +118,7 @@ const ProductDetailCategoryCaptionBar = ({ category }) => {
       </Breadcrumbs>
       <Breadcrumbs
         className="lg:hidden md:block hidden"
-        separator="|"
+        separator="/"
         aria-label="breadcrumb"
       >
         {categoryTree.map((row, index) => {
@@ -306,7 +308,7 @@ const PrdouctAddToCart = () => {
         />
       </div>
       <div className="">
-        <LargePrimaryButton
+        <HirmerButton
           disabled={!product.price}
           className="product-add-to-cart-btn"
           onClick={() =>

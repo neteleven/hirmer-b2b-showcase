@@ -112,7 +112,7 @@ const EachProductRow = ({ item, type, available, rating, productCount }) => {
                   }}
                 />
               </div>
-              <div className="ml-6 h-10 w-40 bg-tinBlue text-white flex items-center">
+              <div className="ml-6 h-10 w-40 bg-tinBlue text-black flex items-center">
                 <div
                   className="mx-auto flex cursor-pointer"
                   onClick={handleAddToCart}
