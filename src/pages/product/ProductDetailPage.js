@@ -175,7 +175,7 @@ const ProductSkuAndReview = ({ product }) => {
     </div>
   )
 }
-const ProductTitle = ({ name, product }) => {
+const ProductTitle = ({ name }) => {
   return <div className="mt-6 product-title">{name}</div>
 }
 const ProductPriceAndAmount = ({ price, productCount, estimatedDelivery, product }) => {

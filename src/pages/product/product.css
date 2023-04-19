@@ -99,6 +99,28 @@
   transition: opacity 0.4s;
   z-index: 30;
 }
+
+.productVariantSelectionColor_selected {
+  border-color: #1a508e;
+  background-color: #1a508e;
+  color: #fff;
+}
+
+.productVariantSelectionColor_selected:hover {
+  background-color: #3582d1;
+  border-color: #3582d1;
+  color: #fff !important;
+}
+
+.productVariantSelectionColor_notAvailable {
+  border-color: #d9d9d9 !important;
+  pointer-events: none;
+  color: #d9d9d9;
+}
+
+.product-variant-selection-color {
+   @apply p-[1px] w-10 h-10 border border-black mr-2 flex justify-center items-center font-bold hover:text-blue;
+}
 .product-detail-page-wrapper {
   @apply w-full pt-16 md:px-24 px-[16.5px] md:pb-24 pb-12 font-inter;
 }

@@ -83,6 +83,24 @@ export const ProductVariantSelection =  ({ product }) => {
 
     const [selectedVariant, setVariant] = useState({})
 
+    const selectedColorVariant = (selectedAttributes, size) => {
+    
+        console.log('availableSizesForColor' ,selectedAttributes)
+        let styling = ''
+        const availableSize = selectedAttributes.availableColors.filter((item) => selectedAttributes.color === item.color)[0].availableSizes
+
+        if(availableSize.includes(size)) {
+            styling = 'product-variant-selection-color'
+        } else {
+            styling = 'product-variant-selection-color productVariantSelectionColor_notAvailable'
+        }
+
+        if( selectedAttributes.size === size) {
+            styling = styling + ' productVariantSelectionColor_selected'
+        }
+        return styling
+    }
+
     useEffect(() => {
         ;(async () => {
             const allVariants = await getVariantChildren(product.id)
@@ -104,8 +122,6 @@ export const ProductVariantSelection =  ({ product }) => {
         })()
       }, [product, currentSite, activeCurrency, currentLanguage, selectedAttributes, getVariantChildren, selectedVariant, variants])
 
-      console.log('availableSizesForColor' ,selectedAttributes.availableSizesForColor)
-
     return (
         <div>
             <div className="mb-4">
@@ -113,22 +129,25 @@ export const ProductVariantSelection =  ({ product }) => {
                 {selectedAttributes?.availableColors ? (
                     selectedAttributes?.availableColors.map(item => {
                         return (
-                            <div className={"p-[1px] w-10 h-10 border border-black mr-2 bg-" + normalizeColor(item.color)} onClick={() => setAttribute({
-                                ...selectedAttributes,
-                                color: item.color
-                            })}></div>
+                            <div className={selectedAttributes.color === item.color ? 'border border-solid border-black mr-2 p-[1px]': 'p-[2px] mr-2'}>
+                                <div className={"p-[1px] w-10 h-10 bg-" + normalizeColor(item.color)} onClick={() => setAttribute({
+                                    ...selectedAttributes,
+                                    color: item.color
+                                })}></div>
+                            </div>
                         )
                     })
                 ): ''}
                 </div>
             </div>
-
+            
             <div className="mb-4">
                 <div className="flex">
                     {selectedAttributes?.availableSizes.length ? (
                         selectedAttributes?.availableSizes.map(size => {
+                            selectedColorVariant(selectedAttributes, size)
                             return (
-                                <button className="p-[1px] w-10 h-10 border border-black mr-2 flex justify-center items-center text-bold" onClick={() => setAttribute({
+                                <button className={selectedColorVariant(selectedAttributes, size)} onClick={() => setAttribute({
                                     ...selectedAttributes,
                                     size
                                 })}>
