@@ -273,7 +273,7 @@ function PaymentSmallSummary({ variant, price }) {
     putCartProduct(variantToAdd)
   }, [variant, price])
 
-  return price ? (
+  return(
     <GridLayout className="gap-4 cart-action-panel">
       <CartActionRow>
         <Item>
@@ -284,9 +284,7 @@ function PaymentSmallSummary({ variant, price }) {
         </Item>
       </CartActionRow>
     </GridLayout>
-  ) : (
-    <div> - </div>
-  )
+    )
 }
 
 function VariantDetails({ price, variant, quantity }) {
@@ -445,7 +443,7 @@ export const VariantSmallSummary = ({ variant }) => {
       <Grid item xs={11}>
         <Typography variant="h6">
           <Item>
-          <Grid item xs={2} className='border border-black'>
+          <Grid item xs={2} className='border border-black cart-quantity-panel'>
             <Quantity
               value={quantity}
               increase={() => setQuantity(quantity + 1)}

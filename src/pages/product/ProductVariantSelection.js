@@ -83,22 +83,28 @@ export const ProductVariantSelection =  ({ product }) => {
 
     const [selectedVariant, setVariant] = useState({})
 
-    const selectedColorVariant = (selectedAttributes, size) => {
-    
-        console.log('availableSizesForColor' ,selectedAttributes)
+    const selectedSizeVariant = (selectedAttributes, size) => {
         let styling = ''
         const availableSize = selectedAttributes.availableColors.filter((item) => selectedAttributes.color === item.color)[0].availableSizes
 
         if(availableSize.includes(size)) {
             styling = 'product-variant-selection-color'
         } else {
-            styling = 'product-variant-selection-color productVariantSelectionColor_notAvailable'
+            styling = 'product-variant-selection-color product-variant-selection-color_notAvailable'
         }
 
-        if( selectedAttributes.size === size) {
-            styling = styling + ' productVariantSelectionColor_selected'
-        }
+        if( selectedAttributes.size === size && isSizeAvailableForSelectedColor(selectedAttributes)) {
+            styling = styling + ' product-variant-selection-color_selected'
+        } 
         return styling
+    }
+
+    const isSizeAvailableForSelectedColor = (selectedAttributes) => {
+        return selectedAttributes.availableColors.filter((item) => selectedAttributes.color === item.color)[0].availableSizes.includes(selectedAttributes.size) ? true : false           
+    }
+
+    const activeAddToCart = (selectedVariant) => {
+        return selectedVariant?.id !== undefined ? 'product-variant-cart' : 'product-variant-cart product-variant-cart_inActive'
     }
 
     useEffect(() => {
@@ -128,7 +134,7 @@ export const ProductVariantSelection =  ({ product }) => {
                 <div className="flex">
                 {selectedAttributes?.availableColors ? (
                     selectedAttributes?.availableColors.map(item => {
-                        return (
+                         return (
                             <div className={selectedAttributes.color === item.color ? 'border border-solid border-black mr-2 p-[1px]': 'p-[2px] mr-2'}>
                                 <div className={"p-[1px] w-10 h-10 bg-" + normalizeColor(item.color)} onClick={() => setAttribute({
                                     ...selectedAttributes,
@@ -145,9 +151,8 @@ export const ProductVariantSelection =  ({ product }) => {
                 <div className="flex">
                     {selectedAttributes?.availableSizes.length ? (
                         selectedAttributes?.availableSizes.map(size => {
-                            selectedColorVariant(selectedAttributes, size)
                             return (
-                                <button className={selectedColorVariant(selectedAttributes, size)} onClick={() => setAttribute({
+                                <button className={selectedSizeVariant(selectedAttributes, size)} onClick={() => setAttribute({
                                     ...selectedAttributes,
                                     size
                                 })}>
@@ -158,10 +163,11 @@ export const ProductVariantSelection =  ({ product }) => {
                     ) : ''}                 
                 </div>
             </div>
-
-            {selectedVariant?.id !== undefined ? (
+           
+            <div className={activeAddToCart(selectedVariant)}>    
                <VariantSmallSummary variant={selectedVariant}></VariantSmallSummary>
-            ) : ''}
+            </div>
+      
         </div>
     )
 }
