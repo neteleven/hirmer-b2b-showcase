@@ -45,7 +45,7 @@ export const ProductDetails = () => {
   useEffect(() => {
     ;(async () => {
       if (!product.data) return
-      const brandId = product.data.mixins.productCustomAttributes.brand
+      const brandId = product.data.mixins.productCustomAttributes?.brand
       const brand = await getBrand(brandId)
       setBrand(brand)
     })()
@@ -54,7 +54,7 @@ export const ProductDetails = () => {
   useEffect(() => {
     ;(async () => {
       if (!product.data) return
-      const lableIds = product.data.mixins.productCustomAttributes.labels
+      const lableIds = product.data.mixins.productCustomAttributes?.labels
       if (lableIds && lableIds.length > 0) {
         const labels = await Promise.all(
           lableIds.map(async (labelId) => {

@@ -261,6 +261,34 @@ function PaymentSummary({ variant, price }) {
   )
 }
 
+function PaymentSmallSummary({ variant, price }) {
+  const { putCartProduct } = useCart()
+
+  const addVariantProductToCart = useCallback(() => {
+    const variantToAdd = {
+      ...variant,
+      price: price,
+      quantity: price.quantity.quantity,
+    }
+    putCartProduct(variantToAdd)
+  }, [variant, price])
+
+  return price ? (
+    <GridLayout className="gap-4 cart-action-panel">
+      <CartActionRow>
+        <Item>
+          <LargePrimaryButton
+            title={'Add to cart'}
+            onClick={addVariantProductToCart}
+          />
+        </Item>
+      </CartActionRow>
+    </GridLayout>
+  ) : (
+    <div> - </div>
+  )
+}
+
 function VariantDetails({ price, variant, quantity }) {
   return price ? (
     <Grid container spacing={4}>
@@ -376,3 +404,60 @@ export const VariantAccordion = ({ variant }) => {
     </Grid>
   )
 }
+
+export const VariantSmallSummary = ({ variant }) => {
+  const [expanded, setExpanded] = useState(false)
+  const [quantity, setQuantity] = useState(1)
+  const [price, setPrice] = useState(null)
+  const { activeCurrency } = useCurrency()
+  const toggleExpand = useCallback(() => {
+    setExpanded(!expanded)
+  }, [expanded])
+  const { currentSite } = useSites()
+  const { matchPriceForProductAndQuantity } = usePrices()
+
+  useEffect(() => {
+    ;(async () => {
+      const prices = await matchPriceForProductAndQuantity(variant.id, quantity)
+      setPrice(prices[0])
+    })()
+  }, [quantity, variant.id, currentSite, activeCurrency])
+
+  return (
+    <Grid
+      container
+      direction="row"
+      alignItems="center"
+      spacing={2}
+      sx={{ paddingBottom: '8px', borderBottom: '1px solid #DFE1E5' }}
+    >
+      <Grid item xs={11}>
+      <Grid
+      container
+      spacing={2}
+      direction="row"
+      alignItems="center"
+      justifyContent="space-around"
+    > 
+    </Grid>
+      </Grid>
+      <Grid container spacing={4}>
+      <Grid item xs={11}>
+        <Typography variant="h6">
+          <Item>
+          <Grid item xs={2} className='border border-black'>
+            <Quantity
+              value={quantity}
+              increase={() => setQuantity(quantity + 1)}
+              decrease={() => setQuantity(quantity - 1)}
+            ></Quantity>
+          </Grid>
+        </Item>
+          <PaymentSmallSummary price={price} variant={variant} />
+        </Typography>
+      </Grid>
+    </Grid>
+    </Grid>
+  )
+}
+

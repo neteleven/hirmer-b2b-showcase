@@ -31,6 +31,7 @@ import { PriceTierValues } from './VariantAccordion'
 import { useCart } from 'context/cart-provider'
 import { useAuth } from 'context/auth-provider'
 import { formatPrice } from 'helpers/price'
+import { ProductVariantSelection } from './ProductVariantSelection'
 
 const ProductContext = createContext()
 
@@ -174,10 +175,10 @@ const ProductSkuAndReview = ({ product }) => {
     </div>
   )
 }
-const ProductTitle = ({ name }) => {
+const ProductTitle = ({ name, product }) => {
   return <div className="mt-6 product-title">{name}</div>
 }
-const ProductPriceAndAmount = ({ price, productCount, estimatedDelivery }) => {
+const ProductPriceAndAmount = ({ price, productCount, estimatedDelivery, product }) => {
   const { isLoggedIn } = useAuth()
 
   return (
@@ -208,6 +209,12 @@ const ProductPriceAndAmount = ({ price, productCount, estimatedDelivery }) => {
           </span>
         )}
       </div>
+      {product.productType === 'PARENT_VARIANT' && (
+        <>
+           <ProductVariantSelection product={product} />
+
+        </>
+      )}
 
       <div className="product-amount-wrapper flex mt-6 space-x-6 items-center">
         <span className="product-number">{productCount} in Stock</span>
@@ -223,17 +230,17 @@ const ProductBasicInfo = ({ product }) => {
   const price = useMemo(() => {
     return formatPrice(product, isLoggedIn)
   }, [isLoggedIn, product])
+
   return (
     <div className="product-basic-info-wrapper hidden lg:block">
       <ProductSkuAndReview product={product} />
       <ProductTitle name={product.name} />
-      {product.productType !== 'PARENT_VARIANT' && (
         <ProductPriceAndAmount
           price={price}
           productCount={product.product_count}
           estimatedCelivery={product.estimated_delivery}
+          product={product}
         />
-      )}
     </div>
   )
 }
@@ -372,6 +379,7 @@ const ProductContent = ({ product, brand, labels }) => {
             listPrice={listPrice}
             product_count={product.product_count}
             estimated_delivery={product.estimated_delivery}
+            product={product}
           />
         </div>
         <div className="product-info-wrapper">
