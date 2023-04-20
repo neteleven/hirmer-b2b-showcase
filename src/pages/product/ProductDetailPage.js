@@ -33,6 +33,7 @@ import { useCart } from 'context/cart-provider'
 import { useAuth } from 'context/auth-provider'
 import { formatPrice } from 'helpers/price'
 import { getLanguageFromLocalStorage } from 'context/language-provider'
+import SVG from 'react-inlinesvg'
 import productService from '../../services/product/product.service'
 import priceService from '../../services/product/price.service'
 import { ProductVariantSelection } from './ProductVariantSelection'
@@ -479,19 +480,27 @@ const ProductDetailsTabContent = ({ product }) => {
     })
     return res
   }
+  
   return (
-    <div className="product-details-tab-content-wrapper">
-      <div className="grid grid-cols-1 gap-12">
-        {Object.keys(product.mixins).map((key) => {
-          return (
-            <ProductInfoPortal
-              key={key}
-              caption={getFeatureName(key)}
-              items={getAttributes(product.mixins[key])}
-            />
-          )
-        })}
+    <div className='product-details-tab-content'>
+      <div className="product-details-tab-content-wrapper">
+        <div className="grid grid-cols-1 gap-12">
+          {Object.keys(product.mixins).filter(key => key !== 'hirmerAttributes').map((key) => {
+            return (
+              <ProductInfoPortal
+                key={key}
+                caption={getFeatureName(key)}
+                items={getAttributes(product.mixins[key])}
+                description={product.description}
+              />
+            )
+          })}
+        </div>
       </div>
+
+      <ProductCareInstructions product={product} />
+  
+
     </div>
   )
 }
@@ -526,6 +535,7 @@ const ProductDetailTabContent = ({ product }) => {
     paddingRight: '0px',
     paddingBottom: '8px',
   }
+
   return (
     <Box>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -536,15 +546,11 @@ const ProductDetailTabContent = ({ product }) => {
           aria-label=""
         >
           <Tab sx={tabStyle} label="Details" {...a11yProps(0)} />
-          <Tab sx={tabStyle} label="Additional Information" {...a11yProps(1)} />
           <Tab sx={tabStyle} label="Reviews" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={tab} index={0}>
         <ProductDetailsTabContent product={product} />
-      </TabPanel>
-      <TabPanel value={tab} index={1}>
-        {product.description}
       </TabPanel>
       <TabPanel value={tab} index={2}>
         Reviews
@@ -552,24 +558,41 @@ const ProductDetailTabContent = ({ product }) => {
     </Box>
   )
 }
-const ProductInfoPortal = ({ caption, items }) => {
+const ProductInfoPortal = ({ description, caption, items }) => {
   return (
     <div className="information-portal-wrapper grid grid-cols-1 gap-4">
       <div className="information-caption">{caption}</div>
       <div className="information-content grid grid-cols-1 gap-[6px]">
-        {items.map((row, index) => (
-          <div key={index} className="grid grid-cols-2 gap-2">
-            <div className="information-properties pl-6 grid grid-cols-1">
-              <span key={index}>{row.property}</span>
-            </div>
-            <div className="information-values pl-6 grid grid-cols-1 ">
-              <span key={index}>{row.value}</span>
-            </div>
-          </div>
-        ))}
+      <div className="information-content-product" dangerouslySetInnerHTML={{ __html: description }} />
       </div>
     </div>
   )
+}
+
+const ProductCareInstructions =({product}) => {
+    return (
+      <>
+      {product.mixins.hirmerAttributes?.care_instructions && Array.isArray(product.mixins.hirmerAttributes.care_instructions) ? 
+      <div className="product-details-tab-content-care-wrapper">
+        <div className="information-portal-wrapper grid grid-cols-1 gap-4">
+          <div className="information-caption">Care Instructions</div>
+          <div className='product-details-tab-content-care-instruction'>
+            {
+            (product.mixins.hirmerAttributes?.care_instructions).map((instruction) => {
+                return (
+                  <>
+                    <SVG src={instruction.care_instructions_icon_image}/>
+                    <span>{instruction.care_instructions_name}</span>
+                  </>
+                )
+              })}
+
+          </div>
+        </div>
+      </div> : null
+    }
+    </>
+    )
 }
 
 const ProductDetailInfo = ({ product }) => {
@@ -583,9 +606,6 @@ const ProductDetailInfo = ({ product }) => {
           <Accordion>
             <AccordionItem index={0} title="Details">
               <ProductDetailsTabContent product={product} />
-            </AccordionItem>
-            <AccordionItem index={1} title="Additional Information">
-              {product.description}
             </AccordionItem>
             <AccordionItem index={2} title="Reviews">
               Reviews
@@ -639,9 +659,7 @@ const ProductDetailPage = ({ product, brand, labels }) => {
       <div className="product-detail-page-content">
         <ProductDetailCategoryCaptionBar category={product.category} />
         <ProductContent product={product} brand={brand} labels={labels} />
-        {product.productType === 'PARENT_VARIANT' && (
-          <ProductVariants product={product} />
-        )}
+        
         <ProductDetailInfo product={product} />
         <ProductMatchItems productInput={product}/>
       </div>
