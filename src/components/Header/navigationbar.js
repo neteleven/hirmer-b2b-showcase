@@ -242,33 +242,33 @@ const Navbar = () => {
     <header className="header bg-lightGray">
       {/* Dektop language and currency selection */}
       <div className="desktop_only_flex font-inter text-sm text-black">
-        <div>
-          {fields.siteLabel}:
-          <select
-            className=" w-38 mr-[22px]"
-            onChange={handleSiteChange}
-            value={currentSite}
-          >
+        <div className='flex mr-3'>
             {sites
               .filter((s) => s.active)
               .sort((a, b) => a.code.localeCompare(b.code))
-              .map((site) => {
+              .map((site, i, row) => {
                 return (
-                  <option key={site.code} value={site.code}>
-                    {site.name}
-                  </option>
+                  <div>
+                     <button className="font-bold" key={site.code} value={site.code} onClick={handleSiteChange}>
+                      {site.name}
+                    </button>
+
+                    {i + 1 !== row.length ? (
+                      <span className='ml-3 mr-3'>|</span>
+                    ) : ''}
+                  </div>
                 )
               })}
-          </select>
         </div>
-        <div>
+        {currentSite === 'HGG' ? (
+          <div>
           {fields.languageLabel}:
           <select
             className=""
             onChange={(event) => setLanguage(event.target.value)}
             value={currentLanguage}
           >
-            {languages
+            {languages 
               .sort((a, b) => a.localeCompare(b))
               .map((language) => {
                 return (
@@ -279,6 +279,8 @@ const Navbar = () => {
               })}
           </select>
         </div>
+        ) : ''}
+        
         <div className="ml-[22px]">
           {fields.currencyLabel}:
           <select
