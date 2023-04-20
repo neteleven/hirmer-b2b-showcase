@@ -260,14 +260,15 @@ const Navbar = () => {
                 )
               })}
         </div>
-        <div>
+        {currentSite === 'HGG' ? (
+          <div>
           {fields.languageLabel}:
           <select
             className=""
             onChange={(event) => setLanguage(event.target.value)}
             value={currentLanguage}
           >
-            {languages
+            {languages 
               .sort((a, b) => a.localeCompare(b))
               .map((language) => {
                 return (
@@ -278,6 +279,8 @@ const Navbar = () => {
               })}
           </select>
         </div>
+        ) : ''}
+        
         <div className="ml-[22px]">
           {fields.currencyLabel}:
           <select
