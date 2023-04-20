@@ -124,6 +124,15 @@
   @apply bg-red-700
 }
 
-.bg-darkblue {
+.bg-darkblue,
+.bg-marine {
   @apply bg-darkBlue
+}
+
+.bg-mittelblau {
+  @apply bg-blue
+}
+
+.bg-anthrazit {
+  @apply bg-darkGray
 }

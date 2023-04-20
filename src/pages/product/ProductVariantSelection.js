@@ -14,6 +14,8 @@ function getAllVariantAttributes(variants, setAttribute) {
     let sortedAtrributes = {}
     let availableSizes = []
 
+    console.log(variants)
+
     const sizeSortOrder = {
         'XS': 0,
         'S': 1,
@@ -37,9 +39,15 @@ function getAllVariantAttributes(variants, setAttribute) {
         }
     });
 
-    availableSizes.sort((a, b) => {
-        return sizeSortOrder[a.size] - sizeSortOrder[b.size];
-    });
+    if (availableSizes.filter(size => 'M' === size).length > 0) {
+        availableSizes.sort((a, b) => {
+            return sizeSortOrder[a.size] - sizeSortOrder[b.size];
+        });
+    } else {
+        availableSizes.sort((a, b) => {
+            return Number(a) - Number(b)
+        })
+    }
 
     availableSizes = availableSizes.map(item => item.size)
 
