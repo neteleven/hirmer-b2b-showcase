@@ -27,13 +27,11 @@ import {
   CurrencyBeforeComponent,
   CurrencyBeforeValue,
 } from 'components/Utilities/common'
-import { ProductVariants } from './ProductVariants'
 import { PriceTierValues } from './VariantAccordion'
 import { useCart } from 'context/cart-provider'
 import { useAuth } from 'context/auth-provider'
 import { formatPrice } from 'helpers/price'
 import { getLanguageFromLocalStorage } from 'context/language-provider'
-import SVG from 'react-inlinesvg'
 import productService from '../../services/product/product.service'
 import priceService from '../../services/product/price.service'
 import { ProductVariantSelection } from './ProductVariantSelection'
@@ -581,7 +579,7 @@ const ProductCareInstructions =({product}) => {
             (product.mixins.hirmerAttributes?.care_instructions).map((instruction) => {
                 return (
                   <>
-                    <SVG src={instruction.care_instructions_icon_image}/>
+                    <img className='' src={require(`../../assets/${instruction.care_instructions_icon_image}`)}/>
                     <span>{instruction.care_instructions_name}</span>
                   </>
                 )

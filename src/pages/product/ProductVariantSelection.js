@@ -14,8 +14,6 @@ function getAllVariantAttributes(variants, setAttribute) {
     let sortedAtrributes = {}
     let availableSizes = []
 
-    console.log(variants)
-
     const sizeSortOrder = {
         'XS': 0,
         'S': 1,
@@ -45,7 +43,7 @@ function getAllVariantAttributes(variants, setAttribute) {
         });
     } else {
         availableSizes.sort((a, b) => {
-            return Number(a) - Number(b)
+            return Number(a.size) - Number(b.size)
         })
     }
 
@@ -60,8 +58,6 @@ function getAllVariantAttributes(variants, setAttribute) {
         
         return acc;
       }, {});    
-
-      console.log('sortedAtrributes', sortedAtrributes)
 
     setAttribute({
         color: attributes[0].color,
