@@ -242,7 +242,7 @@ const Navbar = () => {
     <header className="header bg-lightGray">
       {/* Dektop language and currency selection */}
       <div className="desktop_only_flex font-inter text-sm text-black">
-        <div className='flex mr-3'>
+        <div className='flex mr-40'>
             {sites
               .filter((s) => s.active)
               .sort((a, b) => a.code.localeCompare(b.code))
