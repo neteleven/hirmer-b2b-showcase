@@ -4,12 +4,14 @@ import { useSites } from "context/sites-provider"
 import { useEffect, useState } from "react"
 import { useProducts } from "services/product/useProducts"
 import { VariantSmallSummary } from "./VariantAccordion"
+import { useSelector } from "react-redux"
+import { availabilityDataSelector } from "redux/slices/availabilityReducer"
 
 function normalizeColor(color) {
     return color.replace(/\s/g, '').toLowerCase();
 }
 
-function getAllVariantAttributes(variants, setAttribute) { 
+function getAllVariantAttributes(variants, setAttribute, availability) { 
     const attributes = []
     let sortedAtrributes = {}
     let availableSizes = []
@@ -24,15 +26,18 @@ function getAllVariantAttributes(variants, setAttribute) {
     }
     
     variants?.forEach((element, index) => {
+        const stockLevel = availability[`k${element.id}`].stockLevel
         attributes.push({
             key: index,
-            ...element.mixins.productVariantAttributes
+            ...element.mixins.productVariantAttributes,
+
         })
         
         if (!availableSizes.some(i => i.size === element.mixins.productVariantAttributes.size)) {
             availableSizes.push({
                 id: index,
-                size: element.mixins.productVariantAttributes.size
+                size: element.mixins.productVariantAttributes.size,
+                stockLevel
             })
         }
     });
@@ -47,15 +52,22 @@ function getAllVariantAttributes(variants, setAttribute) {
         })
     }
 
-    availableSizes = availableSizes.map(item => item.size)
+    availableSizes = availableSizes.map(item => {
+        return {
+            size: item.size,
+            stockLevel: item.stockLevel
+        }
+    })
 
     sortedAtrributes = attributes.reduce((acc, {color, size}) => {
         acc[color] ??= {color, availableSizes: []};
+
         if(Array.isArray(size)) 
-          acc[color].availableSizes = acc[color].availableSizes.concat(size);
+            acc[color].availableSizes = acc[color].availableSizes.concat(size);
         else
-          acc[color].availableSizes.push(size);
+            acc[color].availableSizes.push(size);
         
+
         return acc;
       }, {});    
 
@@ -72,7 +84,7 @@ export const ProductVariantSelection =  ({ product }) => {
     const { getVariantChildren } = useProducts()
     const { currentSite } = useSites()
     const [variants, setVariants] = useState([])
-
+    const availability = useSelector(availabilityDataSelector)
     
     const { currentLanguage } = useLanguage()
 
@@ -87,17 +99,16 @@ export const ProductVariantSelection =  ({ product }) => {
 
     const [selectedVariant, setVariant] = useState({})
 
-    const selectedSizeVariant = (selectedAttributes, size) => {
+    const selectedSizeVariant = (selectedAttributes, item) => {
         let styling = ''
         const availableSize = selectedAttributes.availableColors.filter((item) => selectedAttributes.color === item.color)[0].availableSizes
-
-        if(availableSize.includes(size)) {
+        if(availableSize.includes(item.size) && item.stockLevel > 0) {
             styling = 'product-variant-selection-color'
         } else {
             styling = 'product-variant-selection-color product-variant-selection-color_notAvailable'
         }
 
-        if( selectedAttributes.size === size && isSizeAvailableForSelectedColor(selectedAttributes)) {
+        if( selectedAttributes.size === item.size && isSizeAvailableForSelectedColor(selectedAttributes) && item.stockLevel > 0) {
             styling = styling + ' product-variant-selection-color_selected'
         } 
         return styling
@@ -116,21 +127,22 @@ export const ProductVariantSelection =  ({ product }) => {
             const allVariants = await getVariantChildren(product.id)
 
           if (allVariants !== undefined && variants.length <= 0) {
-
             setVariants(allVariants)
-            getAllVariantAttributes(allVariants, setAttribute)
+            getAllVariantAttributes(allVariants, setAttribute, availability)
           }
+
 
           if (selectedAttributes.color && selectedAttributes.size) {
             const selected = variants.filter(variant => variant.mixins.productVariantAttributes.color === selectedAttributes.color && variant.mixins.productVariantAttributes.size === selectedAttributes.size)[0];
             if (selected !== undefined) {
+                
                 setVariant(selected)
             } else if (selected === undefined && selectedVariant.id !== undefined) {
                 setVariant({})
             } 
           }
         })()
-      }, [product, currentSite, activeCurrency, currentLanguage, selectedAttributes, getVariantChildren, selectedVariant, variants])
+      }, [product, currentSite, activeCurrency, currentLanguage, selectedAttributes, getVariantChildren, selectedVariant, variants, availability])
 
     return (
         <div>
@@ -154,13 +166,13 @@ export const ProductVariantSelection =  ({ product }) => {
             <div className="mb-4">
                 <div className="flex">
                     {selectedAttributes?.availableSizes.length ? (
-                        selectedAttributes?.availableSizes.map(size => {
+                        selectedAttributes?.availableSizes.map(item => {
                             return (
-                                <button className={selectedSizeVariant(selectedAttributes, size)} onClick={() => setAttribute({
+                                <button className={selectedSizeVariant(selectedAttributes, item)} onClick={() => setAttribute({
                                     ...selectedAttributes,
-                                    size
+                                    size: item.size
                                 })}>
-                                    { size }
+                                    { item.size }
                                 </button>
                             )
                         })
