@@ -1,3 +1,8 @@
+.cart-quantity-panel {
+  padding-top: 8px;
+  margin-bottom: 0.51rem;
+  margin-left: 25px !important;
+}
 .cart-caption-font {
   @apply text-[20px] leading-[22px] font-bold font-inter;
 }
@@ -64,14 +69,11 @@
 .cart-product-price-except-vat {
   @apply text-[16px] leading-[20px] font-bold float-right;
 }
-.cart-action-panel {
-  @apply p-6 bg-bgWhite;
-}
 .cart-action-row {
   @apply pb-4 grid grid-cols-1 gap-4 border-bgWhite border-b last:border-b-0;
 }
 .cart-action-panel {
-  @apply text-[16px] leading-[22px];
+  @apply p-6 text-[16px] leading-[22px];
 }
 .cart-total-price-wrapper {
   @apply text-[20px] leading-[22px] font-bold;

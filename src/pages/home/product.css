@@ -119,3 +119,28 @@
 .slide {
   height: 456px;
 }
+
+.bg-red{
+  @apply bg-red-700
+}
+
+.bg-darkblue,
+.bg-marine {
+  @apply bg-darkBlue
+}
+
+.bg-mittelblau {
+  @apply bg-blue
+}
+
+.bg-anthrazit {
+  @apply bg-darkGray
+}
+
+.bg-hellgrau {
+  @apply bg-lightGray
+}
+
+.bg-beige {
+  @apply bg-braun
+}

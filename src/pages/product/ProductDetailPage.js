@@ -27,15 +27,14 @@ import {
   CurrencyBeforeComponent,
   CurrencyBeforeValue,
 } from 'components/Utilities/common'
-import { ProductVariants } from './ProductVariants'
 import { PriceTierValues } from './VariantAccordion'
 import { useCart } from 'context/cart-provider'
 import { useAuth } from 'context/auth-provider'
 import { formatPrice } from 'helpers/price'
 import { getLanguageFromLocalStorage } from 'context/language-provider'
-import SVG from 'react-inlinesvg'
 import productService from '../../services/product/product.service'
 import priceService from '../../services/product/price.service'
+import { ProductVariantSelection } from './ProductVariantSelection'
 
 const getRelatedProducts = async (language, product) => {
   let productIds = []
@@ -215,7 +214,7 @@ const ProductSkuAndReview = ({ product }) => {
 const ProductTitle = ({ name }) => {
   return <div className="mt-6 product-title">{name}</div>
 }
-const ProductPriceAndAmount = ({ price, productCount, estimatedDelivery }) => {
+const ProductPriceAndAmount = ({ price, productCount, estimatedDelivery, product }) => {
   const { isLoggedIn } = useAuth()
 
   return (
@@ -246,6 +245,12 @@ const ProductPriceAndAmount = ({ price, productCount, estimatedDelivery }) => {
           </span>
         )}
       </div>
+      {product.productType === 'PARENT_VARIANT' && (
+        <>
+           <ProductVariantSelection product={product} />
+
+        </>
+      )}
 
       <div className="product-amount-wrapper flex mt-6 space-x-6 items-center">
         <span className="product-number">{productCount} in Stock</span>
@@ -261,17 +266,17 @@ const ProductBasicInfo = ({ product }) => {
   const price = useMemo(() => {
     return formatPrice(product, isLoggedIn)
   }, [isLoggedIn, product])
+
   return (
     <div className="product-basic-info-wrapper hidden lg:block">
       <ProductSkuAndReview product={product} />
       <ProductTitle name={product.name} />
-      {product.productType !== 'PARENT_VARIANT' && (
         <ProductPriceAndAmount
           price={price}
           productCount={product.product_count}
           estimatedCelivery={product.estimated_delivery}
+          product={product}
         />
-      )}
     </div>
   )
 }
@@ -410,6 +415,7 @@ const ProductContent = ({ product, brand, labels }) => {
             listPrice={listPrice}
             product_count={product.product_count}
             estimated_delivery={product.estimated_delivery}
+            product={product}
           />
         </div>
         <div className="product-info-wrapper">
@@ -573,7 +579,7 @@ const ProductCareInstructions =({product}) => {
             (product.mixins.hirmerAttributes?.care_instructions).map((instruction) => {
                 return (
                   <>
-                    <SVG src={instruction.care_instructions_icon_image}/>
+                    <img className='' src={require(`../../assets/${instruction.care_instructions_icon_image}`)}/>
                     <span>{instruction.care_instructions_name}</span>
                   </>
                 )
@@ -651,9 +657,7 @@ const ProductDetailPage = ({ product, brand, labels }) => {
       <div className="product-detail-page-content">
         <ProductDetailCategoryCaptionBar category={product.category} />
         <ProductContent product={product} brand={brand} labels={labels} />
-        {product.productType === 'PARENT_VARIANT' && (
-          <ProductVariants product={product} />
-        )}
+        
         <ProductDetailInfo product={product} />
         <ProductMatchItems productInput={product}/>
       </div>
