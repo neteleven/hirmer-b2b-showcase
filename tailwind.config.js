@@ -26,6 +26,7 @@ module.exports = {
         blueHover: "#365C97",
         green: "#83ca25",
         greenHover: "#598919",
+        braun: "#e9e0c8",
       }
     }
   },

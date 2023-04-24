@@ -136,3 +136,11 @@
 .bg-anthrazit {
   @apply bg-darkGray
 }
+
+.bg-hellgrau {
+  @apply bg-lightGray
+}
+
+.bg-beige {
+  @apply bg-braun
+}
