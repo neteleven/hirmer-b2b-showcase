@@ -1,51 +1,69 @@
-import React, { useEffect, useState } from 'react'
-import { useContentful } from '../../context/contentful-provider'
-import landingBg from '../../assets/landing_bg.png'
+import React from 'react'
+import { useSites } from 'context/sites-provider'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from 'context/auth-provider'
+
 const About = () => {
-  const { fields } = useContentful()
-  const [introImageUrl, setIntroImageUrl] = useState('')
+  const {  currentSite } = useSites()
+  const navigate = useNavigate()
+  const { userTenant: tenant } = useAuth()
+  const eckerleUrl = 'https://n.hirmercdn.de/eck/content/teasers/startseite/STS_20230406/20230405-newin-dsk.jpg'
 
-  const { mainImageRight } = fields
+  const mappingPageName = {
+    'main': 'hirmer',
+    'HGG': 'hirmer_grosse_grössen',
+    'ECK': 'eckerle'
+  }
 
-  useEffect(() => {
-    ;(async () => {
-      if (
-        mainImageRight &&
-        mainImageRight.fields &&
-        mainImageRight.fields.file &&
-        mainImageRight.fields.file.url
-      ) {
-        setIntroImageUrl(mainImageRight.fields.file.url)
-      }
-    })()
-  }, [mainImageRight])
+  const handleSiteChange = () => {
+    navigate(`/${tenant}/product/${mappingPageName[currentSite]}`)
+  }
 
-  return (
-    <div
-      className="home_about flex items-center justify-center"
-    >
-      <div className=" bg-purple flex w-1/2 h-48 items-center justify-center">
-        <div className="px-6 md:pl-16 pt-[48px] md:pt-[363px]  ">
-          <div className="text-[40px] md:text-[56px] font-inter font-semibold leading-[48px] md:leading-[64px]">
-            {fields.mainTitle}
+  function aboutVariant (site) {
+    switch (site) {
+      case 'ECK':
+        return (
+          <div className='home_about-eck flex items-center justify-center' onClick={handleSiteChange}>
+            <div className="flex items-center justify-center">
+              <img src={eckerleUrl} className="" alt='eckler'/>
+            </div>  
           </div>
-          <div className="text-[20px] leading-[32px] font-inter font-light pt-[27px] md:max-w-[525px]">
-            {fields.companyMission}
-          </div>
-
-          <div className="pt-[78px] desktop_only text-sm">
-            <button className="px-6 py-4 bg-blue text-white uppercase font-bold transition ease-in-out duration-300 hover:bg-blueHover">
-              {fields.startShoppingButtonLabel}
-            </button>
-          </div>
-        </div>
-        <img
-          src={introImageUrl}
-          className=" mt-[60px] hidden xl:block w-[530px] h-[818px] "
-        />
-      </div>
+        )
       
-    </div>
+      case 'main':
+        return (
+          <div className='home-about-hirmer' onClick={handleSiteChange}>
+            <div class="home-about-hirmer__teaser"> 
+               <img src="https://n.hirmercdn.de/hrm/content/teasers/startseite/STS_20230406/20230405_hir_sts_jacken.jpg" alt="hirmer"/>
+            </div>
+
+            <div class="home-about-hirmer__teaser">
+              <img src="https://n.hirmercdn.de/hrm/content/teasers/startseite/STS_20230421/20230421_hir_sts_lacoste-netflix.jpg" alt="hirmer"/>
+            </div>
+          </div>
+        )
+    
+      default:
+        return (
+          <div className='home-about-hgg' onClick={handleSiteChange}>
+            <div class="home-about-hgg__teaser">
+              <img src="https://n.hirmercdn.de/hgg/content/teasers/startseite/sts_20230406/20230406-lederjacken-en-dsk.jpg"/>
+            </div>
+
+            <div class="home-about-hgg__teaser">
+              <img src="https://n.hirmercdn.de/hgg/content/teasers/startseite/sts_20230406/20230406-sweatshirts-en-dsk.jpg" />
+            </div>
+
+            <div class="home-about-hgg__teaser">
+              <img src="https://n.hirmercdn.de/hgg/content/teasers/startseite/sts_20230406/20230406-marcopolo-en-dsk.jpg" />
+            </div>
+          </div>     
+        )
+    }
+  }
+
+  return ( 
+      aboutVariant(currentSite)
   )
 }
 

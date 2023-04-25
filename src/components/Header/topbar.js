@@ -198,7 +198,7 @@ const TopNav = ({ title }) => {
         </div>
       </div>
       {nav_title_condition && (
-        <div className=" md:absolute mt-[176px] ml-24 text-black font-inter font-bold text-[32px]">
+        <div className=" md:absolute mt-[200px] ml-24 text-black font-inter font-bold text-[32px]">
           {title}
         </div>
       )}
