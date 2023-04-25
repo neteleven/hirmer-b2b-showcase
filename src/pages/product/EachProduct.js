@@ -39,6 +39,8 @@ const EachProduct = ({ item, available, rating, productCount }) => {
             {available ? 'In Stock' : 'Out Of Stock'}
           </div>
         )}
+
+
         <div className="flex h-5 float-right lg:float-none">
           <ReactStars size={16} value={rating} color2={'#FBB13C'} />(
           {productCount})
