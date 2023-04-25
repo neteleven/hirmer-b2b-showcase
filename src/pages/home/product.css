@@ -144,3 +144,7 @@
 .bg-beige {
   @apply bg-braun
 }
+
+.bg-black {
+   background-color: black
+}
