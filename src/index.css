@@ -22,10 +22,24 @@ code {
   justify-content: space-evenly;
   padding-top: 250px;
   padding-bottom: 100px;
+  cursor: pointer;
 }
 
 .home-about-hirmer__teaser {
   width: 40%;
+}
+
+.home-about-hgg {
+  display: flex;
+  justify-content: space-around;
+  padding: 250px 0 100px 0;
+  cursor: pointer;
+}
+
+.home-about-hgg__teaser {
+  display: flex;
+  justify-content: center;
+  width: 30%;
 }
 
 .header {
@@ -55,8 +69,8 @@ code {
   @apply flex bg-[length:100%_167%] md:bg-[length:100%_100%] pt-20 md:pt-0 w-full h-[513px] md:h-[988px] justify-between text-black;
 }
 
-.home_about__eck {
-  @apply flex md:bg-[length:100%_100%] pt-20 md:ml-[100px] w-full h-[513px] md:h-[1200px] justify-center text-black;
+.home_about-eck {
+  @apply flex md:bg-[length:100%_100%] pt-20 md:ml-[100px] w-full h-[513px] md:h-[1200px] justify-center text-black cursor-pointer;
 }
 
 .home_service {
