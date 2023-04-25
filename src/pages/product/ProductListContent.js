@@ -120,6 +120,7 @@ const ProductListItems = ({ products, auth, displayType }) => {
         case 1:
           subItemArr.push(
             <div key={i} className="w-1/3 p-6 ">
+              {item.productType === 'PARENT_VARIANT' && (
               <EachProduct
                 key={item.id}
                 available={available}
@@ -127,6 +128,7 @@ const ProductListItems = ({ products, auth, displayType }) => {
                 productCount={8}
                 item={item}
               />
+              )}
             </div>
           )
           break
@@ -136,6 +138,7 @@ const ProductListItems = ({ products, auth, displayType }) => {
               key={i}
               className="w-1/3  p-6 border-l border-bgWhite border-solid"
             >
+              {item.productType === 'PARENT_VARIANT' && (
               <EachProduct
                 key={item.id}
                 available={available}
@@ -143,6 +146,7 @@ const ProductListItems = ({ products, auth, displayType }) => {
                 productCount={8}
                 item={item}
               />
+              )}
             </div>
           )
           break
@@ -152,6 +156,7 @@ const ProductListItems = ({ products, auth, displayType }) => {
               key={i}
               className="w-1/3 p-6 border-l border-bgWhite border-solid"
             >
+               {item.productType === 'PARENT_VARIANT' && (
               <EachProduct
                 key={item.id}
                 available={available}
@@ -159,6 +164,7 @@ const ProductListItems = ({ products, auth, displayType }) => {
                 productCount={8}
                 item={item}
               />
+               )}
             </div>
           )
           itemArr.push(
