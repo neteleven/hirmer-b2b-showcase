@@ -216,6 +216,7 @@ const Navbar = () => {
     await onSiteChange(e.target.value)
     const site = sites.find((site) => site.code === e.target.value)
     await currencyChangeHandler(site.currency, site)
+    navigate(homeUrl())
   }
 
   const [cartTotal, setCartTotal] = useState(0)
