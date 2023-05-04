@@ -129,7 +129,8 @@
   @apply bg-darkBlue
 }
 
-.bg-mittelblau {
+.bg-mittelblau,
+.bg-blau {
   @apply bg-blue
 }
 
@@ -147,4 +148,8 @@
 
 .bg-black {
    background-color: black
+}
+
+.bg-grau {
+  background-color: darkGray
 }
