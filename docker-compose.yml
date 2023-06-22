@@ -1,0 +1,17 @@
+version: '3'
+services:
+  graphql-server:
+    image: ${DOCKER_REGISTRY_HOST}/${DOCKER_REGISTRY_REPO}:latest
+    ports:
+    - 4000: 4000
+    environment:
+      LOG_LEVEL: 'info'
+      SERVICE_NAME: 'showcase-graphql'
+      NODE_ENV: 'development'
+      EMPORIX_CLIENT_ID: 'j6BkVo5Ou2ulihEfnpCpogjIPl7xd5m1'
+      EMPORIX_TENANT: 'n11showcase'
+      EMPORIX_CATALOG: 'neteleven-showcase-catalog-wine' 
+      ALGOLIA_APP_ID: '0I0CCJTCIW'
+      ALGOLIA_SEARCH_KEY: '99c8db9d721e01aac02243e388112b1e'
+      ALGOLIA_INDEX_NAME: 'showcase_de_wine' 
+      AMPLIENCE_BASE_URL: 'https://netelevensandbox.cdn.content.amplience.net'
